@@ -26,15 +26,25 @@ const gameState = {
       name: "wrap",
       value: 0,
       rps: 0,
+      click: 1,
       modules: {},
     },
     {
       name: "steam",
       value: 0,
       rps: 0,
+      click: 1,
       modules: {},
     },
   ],
+};
+const handleClick = (e) => {
+  const entity = e.target.getAttribute('entity-type');
+  if(!entity) {
+    throw new Error('Please provide an entity type for this clicker')
+  }
+  const clicker = gameState.clickers.find(clicker => clicker.name === entity);
+  clicker.value += clicker.click;
 };
 
 const gameLoop = () => {
