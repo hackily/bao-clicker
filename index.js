@@ -1,62 +1,124 @@
 // #region constants
-const TICK = 100;
+const TICK = 42;
+const ENTITY_TYPES = {
+  wrap: 'wrap',
+  steam: 'steam',
+  sell: 'sell',
+}
 const WRAP_MODULES = {
   auntie: {
-    baseValue: 1,
+    baseRps: 1,
+    baseCost: 100,
     growth: 1.3,
-    cost: 100,
+    parentEntity: 'wrap'
   },
 };
 const STEAM_MODULES = {
-  steam_basket: {
-    baseValue: 0.1,
+  steamBasket: {
+    baseRps: 0.1,
+    baseCost: 10,
     growth: 1.2,
-    cost: 10,
+    parentEntity: 'steam'
   },
 };
+const SELL_MODULES = {
+  cart: {
+    baseRps: 2,
+    baseCost: 200,
+    growth: 1.5,
+    parentEntity: 'sell'
+  }
+}
 const MODULES_MAP = {
   ...WRAP_MODULES,
   ...STEAM_MODULES,
+  ...SELL_MODULES
 };
 // #endregion constants
 
 const gameState = {
+  currencyEntity: ENTITY_TYPES.sell,
   clickers: [
     {
-      name: "wrap",
-      value: 0,
+      entity: ENTITY_TYPES.wrap,
+      value: 100,
+      rps: 0,
+      click: 1,
+      modules: {
+        auntie: 1
+      },
+    },
+    {
+      entity: ENTITY_TYPES.steam,
+      value: 100,
       rps: 0,
       click: 1,
       modules: {},
     },
     {
-      name: "steam",
+      entity: ENTITY_TYPES.sell,
       value: 0,
       rps: 0,
       click: 1,
-      modules: {},
+      modules: {
+        cart: 1
+      },
     },
   ],
 };
+
+const buyModule = (e) => {
+  const moduleEntity = e.currentTarget.getAttribute('entity-type');
+  const module = MODULES_MAP[moduleEntity];
+  if(module) {
+    // Subtract cost
+    const currencyClicker = gameState.clickers.find(clicker => clicker.entity === gameState.currencyEntity);
+    const clicker = gameState.clickers.find(clicker => clicker.entity === module.parentEntity);
+    currencyClicker.value -= module.baseCost * Math.pow(module.growth, clicker.modules[moduleEntity] ?? 0);
+    // Increase module value;
+    clicker.modules[moduleEntity]++;
+  }
+}
+
 const handleClick = (e) => {
-  const entity = e.target.getAttribute('entity-type');
+  const entity = e.currentTarget.getAttribute('entity-type');
   if(!entity) {
     throw new Error('Please provide an entity type for this clicker')
   }
-  const clicker = gameState.clickers.find(clicker => clicker.name === entity);
-  clicker.value += clicker.click;
+  const clickerIdx = gameState.clickers.findIndex(clicker => clicker.entity === entity);
+  const clicker = gameState.clickers[clickerIdx]
+  const prevClicker = gameState.clickers[clickerIdx -1];
+  let created = clicker.click;
+  if(prevClicker) {
+    created = Math.min(prevClicker.value, created)
+    prevClicker.value -= created;
+  }
+  clicker.value += created;
 };
 
 const gameLoop = () => {
-  gameState.clickers.forEach((clicker) => {
+  gameState.clickers.forEach((clicker, index) => {
     const { modules } = clicker;
     // Recalculate RPS
     clicker.rps = Object.keys(modules).reduce(
-      (acc, moduleName) => acc + MODULES_MAP[moduleName]?.baseValue ?? 0,
+      (acc, moduleName) => acc + (MODULES_MAP[moduleName]?.baseRps ?? 0) * modules[moduleName],
       0
     );
     // Apply values
-    clicker.value += clicker.rps / (1000 / TICK);
+    const prevClicker = gameState.clickers[index -1];
+    const rate = clicker.rps / (1000 / TICK);
+    let created = rate;
+    if(prevClicker) {
+      created = Math.min(prevClicker.value, rate)
+      prevClicker.value -= created;
+    }
+    clicker.value += created
+    
+    // Draw
+    const valueEl = document.querySelector(`var[entity-type='${clicker.entity}']`);
+    if(valueEl) {
+      valueEl.innerHTML = Math.floor(clicker.value).toLocaleString(undefined)
+    }
   });
 };
 
