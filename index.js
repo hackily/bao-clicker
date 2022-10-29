@@ -15,9 +15,9 @@ const WRAP_MODULES = {
 };
 const STEAM_MODULES = {
   steamBasket: {
-    baseRps: 0.1,
+    baseRps: 0.2,
     baseCost: 10,
-    growth: 1.2,
+    growth: 1.1,
     parentEntity: 'steam'
   },
 };
@@ -67,6 +67,17 @@ const gameState = {
   ],
 };
 
+const getModuleCost = (moduleEntity) => {
+  const module = MODULES_MAP[moduleEntity];
+  const clicker = gameState.clickers.find(clicker => clicker.entity === module.parentEntity);
+  return Math.round(module.baseCost * Math.pow(module.growth, clicker.modules[moduleEntity] ?? 0));
+} 
+
+const getCurrency = () => {
+  const currencyClicker = gameState.clickers.find(clicker => clicker.entity === gameState.currencyEntity);
+  return currencyClicker.value;
+}
+
 const buyModule = (e) => {
   const moduleEntity = e.currentTarget.getAttribute('entity-type');
   const module = MODULES_MAP[moduleEntity];
@@ -74,9 +85,15 @@ const buyModule = (e) => {
     // Subtract cost
     const currencyClicker = gameState.clickers.find(clicker => clicker.entity === gameState.currencyEntity);
     const clicker = gameState.clickers.find(clicker => clicker.entity === module.parentEntity);
-    currencyClicker.value -= module.baseCost * Math.pow(module.growth, clicker.modules[moduleEntity] ?? 0);
+    currencyClicker.value -= getModuleCost(moduleEntity);
     // Increase module value;
-    clicker.modules[moduleEntity]++;
+    clicker.modules[moduleEntity] = (clicker.modules[moduleEntity] ?? 0) + 1
+    // Update cost
+    const costEl = e.currentTarget.querySelector('var[data-type="cost"]')
+    costEl.innerHTML = getModuleCost(moduleEntity).toLocaleString();
+    // Update quantity
+    const quantityEl = e.currentTarget.querySelector('var[data-type="quantity"]')
+    quantityEl.innerHTML = clicker.modules[moduleEntity]
   }
 }
 
@@ -120,6 +137,12 @@ const gameLoop = () => {
       valueEl.innerHTML = Math.floor(clicker.value).toLocaleString(undefined)
     }
   });
+  const currency = getCurrency();
+  const buyModuleBtns = document.querySelectorAll('.module-container button') 
+  buyModuleBtns.forEach(btn => {
+    const moduleEntity = btn.getAttribute('entity-type');
+    btn.disabled = currency < getModuleCost(moduleEntity);
+  })
 };
 
 const startGameLoop = () => {

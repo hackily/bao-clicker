@@ -18,7 +18,8 @@
         <section class="module-container">
           <button entity-type="auntie" onclick="buyModule(event)">
             <span>Auntie</span>
-            <var>100</var>
+            <var data-type="cost">100</var>
+            <var data-type="quantity"></var>
           </button>
         </section>
       </section>
@@ -30,8 +31,11 @@
         </section>
         <section class="module-container">
           <button entity-type="steamBasket" onclick="buyModule(event)">
-            <span>Steam basket</span>
-            <var>10</var>
+            <section>
+              <span>Steam basket</span>
+              <var data-type="cost">10</var>
+            </section>
+            <var class="end-enhancer" data-type="quantity">1</var>
           </button>
         </section>
       </section>
@@ -44,7 +48,8 @@
         <section class="module-container">
           <button entity-type="cart" onclick="buyModule(event)">
             <span>Cart</span>
-            <var>200</var>
+            <var data-type="cost">200</var>
+            <var data-type="quantity"></var>
           </button>
         </section>
       </section>
