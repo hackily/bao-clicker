@@ -10,16 +10,16 @@ const WRAP_MODULES = {
   auntie: {
     baseRps: 1,
     baseCost: 50,
-    growth: 1.3,
+    growth: 1.1,
     parentEntity: 'wrap',
 
   },
 };
 const STEAM_MODULES = {
   'steam-basket': {
-    baseRps: 0.2,
+    baseRps: 0.5,
     baseCost: 10,
-    growth: 1.1,
+    growth: 1.05,
     parentEntity: 'steam',
 
   },
@@ -28,7 +28,7 @@ const SELL_MODULES = {
   cart: {
     baseRps: 2,
     baseCost: 50,
-    growth: 1.5,
+    growth: 1.2,
     parentEntity: 'sell',
 
   }
@@ -45,25 +45,36 @@ const gameState = {
   clickers: [
     {
       entity: ENTITY_TYPES.wrap,
-      value: 100,
+      value: 10,
       rps: 0,
       click: 1,
+      warnings: {
+        outOfResource: ""
+      },
       modules: {
         auntie: 1
       },
     },
     {
       entity: ENTITY_TYPES.steam,
-      value: 100,
+      value: 10,
       rps: 0,
       click: 1,
-      modules: {},
+      warnings: {
+        outOfResource: "Wrap more bao"
+      },
+      modules: {
+        'steam-basket': 1
+      },
     },
     {
       entity: ENTITY_TYPES.sell,
       value: 0,
       rps: 0,
       click: 1,
+      warnings: {
+        outOfResource: "Steam more bao"
+      },
       modules: {
         cart: 1
       },
@@ -135,6 +146,19 @@ const gameLoop = () => {
     if(prevClicker) {
       created = Math.min(prevClicker.value, rate)
       prevClicker.value -= created;
+      const clickerEl = document.querySelector(`button[entity-type="${clicker.entity}"]`)
+      const warningEl = document.querySelector(`section[entity-type="${clicker.entity}"] aside`);
+      if(Math.round(prevClicker.value) === 0) {
+        clickerEl.disabled = true;
+        if(warningEl.innerHTML !== clicker.warnings.outOfResource) {
+          warningEl.innerHTML = clicker.warnings.outOfResource;
+        }
+      } else {
+        clickerEl.disabled = false;
+        if(warningEl.innerHTML !== '') {
+          warningEl.innerHTML = '';
+        }
+      }
     }
     clicker.value += created
     

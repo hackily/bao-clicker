@@ -7,15 +7,15 @@
       name="keywords"
       content="idle clicker game xiaolongbao bao steamed buns xlb"
     />
-    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
-    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="static/bao-icon.svg">
+    <link rel="icon" type="image/png" href="static/favicon.png">
     <link rel="stylesheet" type="text/css" href="main.css" >
   </head>
   <body>
     <div class="container">
       <section class="clicker-container">
         <section class="create-product" entity-type="wrap">
-          <var data-type="value"></var>
+          <var class="bao-quantity" data-type="value"></var>
           <label>wrapped bao</label>
           <div>
             <label>per second: </label><var data-type="rps"></var>
@@ -26,10 +26,12 @@
             onclick="handleClick(event)"
             entity-type="wrap"
           ></button>
+          <aside></aside>
         </section>
         <section class="module-container">
           <article class="bao-auntie">
             <button entity-type="auntie" onclick="buyModule(event)">
+              <picture></picture>
               <section>
                 <span>Auntie</span>
                 <div class="cost">
@@ -39,15 +41,13 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure>
-              <picture></picture>
-            </figure>
+            <figure></figure>
           </article>
         </section>
       </section>
       <section class="clicker-container">
         <section class="create-product" entity-type="steam">
-          <var data-type="value"></var>
+          <var class="bao-quantity" data-type="value"></var>
           <label>steamed bao</label>
           <div>
             <label>per second: </label><var data-type="rps"></var>
@@ -58,10 +58,12 @@
             onclick="handleClick(event)"
             entity-type="steam"
           ></button>
+          <aside></aside>
         </section>
         <section class="module-container">
           <article class="bao-steam-basket">
             <button entity-type="steam-basket" onclick="buyModule(event)">
+              <picture></picture>
               <section>
                 <span>Steam basket</span>
                 <div class="cost">
@@ -71,15 +73,13 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure>
-              <picture></picture>
-            </figure>
+            <figure></figure>
           </article>
         </section>
       </section>
       <section class="clicker-container">
         <section class="create-product" entity-type="sell">
-          <var data-type="value"></var>
+          <var class="bao-quantity" data-type="value"></var>
           <label>sold bao</label>
           <div>
             <label>per second: </label><var data-type="rps"></var>
@@ -90,10 +90,12 @@
             onclick="handleClick(event)"
             entity-type="sell"
           ></button>
+          <aside></aside>
         </section>
         <section class="module-container">
           <article class="bao-cart">
             <button entity-type="cart" onclick="buyModule(event)">
+              <picture></picture>
               <section>
                 <span>Cart</span>
                 <div class="cost">
@@ -103,9 +105,7 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure>
-              <picture></picture>
-            </figure>
+            <figure></figure>
           </article>
         </section>
       </section>
