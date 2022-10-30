@@ -53,11 +53,13 @@
     --bao-icon: url("./static/bao-icon.svg");
     --bao-steamer: url("./static/steamer.svg") no-repeat bottom;
     --bao-steamer-open: url("./static/steamer-open.svg") no-repeat bottom;
-    --bao-steamer-half-open: url("./static/steamer-half-open.svg")no-repeat bottom;
+    --bao-steamer-half-open: url("./static/steamer-half-open.svg") no-repeat
+      bottom;
     --bao-steamer-empty: url("./static/steamer-empty.svg") no-repeat bottom;
     --bao-steamer-closed: url("./static/steamer-closed.svg") no-repeat bottom;
     --bao-standalone: url("./static/bao-standalone.svg") no-repeat bottom;
     --bao-standalone-faces: url("./static/bao-standalone-faces.svg") no-repeat bottom;
+    --bao-auntie: url("./static/auntie.svg") no-repeat bottom;
   }
   .icon {
     height: 1em;
@@ -72,8 +74,30 @@
     width: 100%;
     height: 100%;
   }
+  .container > section:not(:last-child) {
+    border-right: 2px solid black;
+  }
+  .bao-auntie picture {
+    background: var(--bao-auntie);
+    background-size: contain;
+  }
+  .bao-cart picture {
+    background: var(--bao-steamer-half-open);
+    background-size: contain;
+  }
+
+  .bao-steam-basket picture {
+    background: var(--bao-steamer-closed);
+    background-size: contain;
+  }
+
+  
   .clicker {
     margin: auto;
+  }
+  .create-product {
+    padding: 16px;
+    border-bottom: 2px solid black;
   }
   .create-product button {
     width: 100%;
@@ -81,17 +105,19 @@
     flex: 1;
     display: flex;
     border: none;
-
   }
   button.bao-wrap {
     background: var(--bao-standalone);
-
   }
   button.bao-wrap:active {
     background: var(--bao-standalone-faces);
   }
   button.bao-steam {
-    background: var(--bao-steamer);
+    background: var(--bao-steamer-empty);
+    background-size: contain;
+  }
+  button.bao-steam:hover {
+    background: var(--bao-steamer-open);
     background-size: contain;
   }
   button.bao-steam:active {
@@ -109,11 +135,21 @@
   .create-product {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 16em;
     align-items: center;
+  }
+  .module-container {
+    display: grid;
+    gap: 24px;
+    padding: 24px;
+  }
+  .module-container article {
+    display: flex;
+    gap: 24px;
   }
   .module-container button {
     display: flex;
+    align-items: center;
   }
   .module-container button section {
     display: flex;
@@ -126,16 +162,20 @@
     align-items: center;
     flex-direction: row;
   }
-  .module-container button .icon {
+  .module-container button .cost picture {
     display: flex;
     align-items: center;
-  }
-  .module-container button .icon::before {
-    display: flex;
-    content: var(--bao-icon);
     height: 1em;
     width: 1em;
+  }
+  .module-container button .cost picture {
+    background: var(--bao-icon);
+    background-size: contain;
     margin-right: 4px;
+  }
+  .module-container figure picture {
+    height: 5em;
+    width: 5em;
   }
 
   button .end-enhancer {

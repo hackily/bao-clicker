@@ -8,7 +8,7 @@ const ENTITY_TYPES = {
 const WRAP_MODULES = {
   auntie: {
     baseRps: 1,
-    baseCost: 100,
+    baseCost: 50,
     growth: 1.3,
     parentEntity: 'wrap'
   },
@@ -24,7 +24,7 @@ const STEAM_MODULES = {
 const SELL_MODULES = {
   cart: {
     baseRps: 2,
-    baseCost: 200,
+    baseCost: 50,
     growth: 1.5,
     parentEntity: 'sell'
   }
@@ -150,7 +150,19 @@ const gameLoop = () => {
   })
 };
 
+const initialize = () => {
+  Object.keys(MODULES_MAP).forEach(moduleEntity => {
+    // Update cost
+    const costEl = document.querySelector(`button[entity-type="${moduleEntity}"] var[data-type="cost"]`);
+    costEl.innerHTML = getModuleCost(moduleEntity).toLocaleString();
+    // Update quantity
+    const quantityEl = document.querySelector(`button[entity-type="${moduleEntity}"] var[data-type="quantity"]`);
+    quantityEl.innerHTML = gameState.clickers.find(clicker => clicker.entity === MODULES_MAP[moduleEntity].parentEntity).modules[moduleEntity] ?? ''
+  })
+}
+
 const startGameLoop = () => {
+  initialize()
   gameLoop();
   setTimeout(startGameLoop, TICK);
 };

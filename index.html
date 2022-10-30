@@ -8,16 +8,15 @@
       content="idle clicker game xiaolongbao bao steamed buns xlb"
     />
     <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="index.js"></script>
   </head>
   <body>
     <div class="container">
       <section class="clicker-container">
         <section class="create-product" entity-type="wrap">
-          <var data-type="value">123</var>
-          <label>Wrapped bao</label>
+          <var data-type="value"></var>
+          <label>wrapped bao</label>
           <div>
-            <label>per second:  </label><var data-type="rps">1</var>
+            <label>per second: </label><var data-type="rps"></var>
           </div>
           <button
             class="clicker bao-wrap"
@@ -27,23 +26,29 @@
           ></button>
         </section>
         <section class="module-container">
-          <button entity-type="auntie" onclick="buyModule(event)">
-            <section>
-              <span>Auntie</span>
-              <div>
-                <var class="icon" data-type="cost">200</var>
-              </div>
-            </section>
-            <var class="end-enhancer" data-type="quantity">1</var>
-          </button>
+          <article class="bao-auntie">
+            <button entity-type="auntie" onclick="buyModule(event)">
+              <section>
+                <span>Auntie</span>
+                <div class="cost">
+                  <picture></picture>
+                  <var data-type="cost">50</var>
+                </div>
+              </section>
+              <var class="end-enhancer" data-type="quantity">1</var>
+            </button>
+            <figure>
+              <picture></picture>
+            </figure>
+          </article>
         </section>
       </section>
       <section class="clicker-container">
         <section class="create-product" entity-type="steam">
-          <var data-type="value">123</var>
-          <label>Steamed bao</label>
+          <var data-type="value"></var>
+          <label>steamed bao</label>
           <div>
-            <label>per second:  </label><var data-type="rps">1</var>
+            <label>per second: </label><var data-type="rps"></var>
           </div>
           <button
             class="clicker bao-steam"
@@ -53,23 +58,29 @@
           ></button>
         </section>
         <section class="module-container">
-          <button entity-type="steamBasket" onclick="buyModule(event)">
-            <section>
-              <span>Steam basket</span>
-              <div>
-                <var class="icon" data-type="cost">10</var>
-              </div>
-            </section>
-            <var class="end-enhancer" data-type="quantity">1</var>
-          </button>
+          <article class="bao-steam-basket">
+            <button entity-type="steamBasket" onclick="buyModule(event)">
+              <section>
+                <span>Steam basket</span>
+                <div class="cost">
+                  <picture></picture>
+                  <var data-type="cost">10</var>
+                </div>
+              </section>
+              <var class="end-enhancer" data-type="quantity">1</var>
+            </button>
+            <figure>
+              <picture></picture>
+            </figure>
+          </article>
         </section>
       </section>
       <section class="clicker-container">
         <section class="create-product" entity-type="sell">
-          <var data-type="value">123</var>
-          <label>Sold bao</label>
+          <var data-type="value"></var>
+          <label>sold bao</label>
           <div>
-            <label>per second:  </label><var data-type="rps">1</var>
+            <label>per second: </label><var data-type="rps"></var>
           </div>
           <button
             class="clicker bao-sell"
@@ -79,17 +90,24 @@
           ></button>
         </section>
         <section class="module-container">
-          <button entity-type="cart" onclick="buyModule(event)">
-            <section>
-              <span>Cart</span>
-              <div>
-                <var class="icon" data-type="cost">200</var>
-              </div>
-            </section>
-            <var class="end-enhancer" data-type="quantity">1</var>
-          </button>
+          <article class="bao-cart">
+            <button entity-type="cart" onclick="buyModule(event)">
+              <section>
+                <span>Cart</span>
+                <div class="cost">
+                  <picture></picture>
+                  <var data-type="cost">50</var>
+                </div>
+              </section>
+              <var class="end-enhancer" data-type="quantity">1</var>
+            </button>
+            <figure>
+              <picture></picture>
+            </figure>
+          </article>
         </section>
       </section>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
