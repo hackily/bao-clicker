@@ -29,6 +29,7 @@
   button,
   textarea,
   select {
+    cursor: pointer;
     font: inherit;
   }
   p,
@@ -49,6 +50,14 @@
 @layer theme {
   body {
     --bao-typography-heading-large: 700 32px /40px sans-serif;
+    --bao-icon: url("./static/bao-icon.svg");
+    --bao-steamer: url("./static/steamer.svg") no-repeat bottom;
+    --bao-steamer-open: url("./static/steamer-open.svg") no-repeat bottom;
+    --bao-steamer-half-open: url("./static/steamer-half-open.svg")no-repeat bottom;
+    --bao-steamer-empty: url("./static/steamer-empty.svg") no-repeat bottom;
+    --bao-steamer-closed: url("./static/steamer-closed.svg") no-repeat bottom;
+    --bao-standalone: url("./static/bao-standalone.svg") no-repeat bottom;
+    --bao-standalone-faces: url("./static/bao-standalone-faces.svg") no-repeat bottom;
   }
   .icon {
     height: 1em;
@@ -65,6 +74,37 @@
   }
   .clicker {
     margin: auto;
+  }
+  .create-product button {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    border: none;
+
+  }
+  button.bao-wrap {
+    background: var(--bao-standalone);
+
+  }
+  button.bao-wrap:active {
+    background: var(--bao-standalone-faces);
+  }
+  button.bao-steam {
+    background: var(--bao-steamer);
+    background-size: contain;
+  }
+  button.bao-steam:active {
+    background: var(--bao-steamer-closed);
+    background-size: contain;
+  }
+  button.bao-sell {
+    background: var(--bao-steamer-closed);
+    background-size: contain;
+  }
+  button.bao-sell:active {
+    background: var(--bao-steamer-half-open);
+    background-size: contain;
   }
   .create-product {
     display: flex;
@@ -86,10 +126,18 @@
     align-items: center;
     flex-direction: row;
   }
-  .module-container button img {
-    margin-right: 2px;
+  .module-container button .icon {
+    display: flex;
+    align-items: center;
   }
-  
+  .module-container button .icon::before {
+    display: flex;
+    content: var(--bao-icon);
+    height: 1em;
+    width: 1em;
+    margin-right: 4px;
+  }
+
   button .end-enhancer {
     font: var(--bao-typography-heading-large);
     line-height: inherit;
