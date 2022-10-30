@@ -57,7 +57,7 @@ const gameState = {
         outOfResource: ""
       },
       modules: {
-        'rolling-pin': 25
+        'rolling-pin': 1
       },
     },
     {
