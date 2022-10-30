@@ -132,10 +132,15 @@ const gameLoop = () => {
     clicker.value += created
     
     // Draw
-    const valueEl = document.querySelector(`var[entity-type='${clicker.entity}']`);
+    const valueEl = document.querySelector(`section[entity-type='${clicker.entity}'] [data-type="value"]`) 
     if(valueEl) {
       valueEl.innerHTML = Math.floor(clicker.value).toLocaleString(undefined)
     }
+    const rpsEl = document.querySelector(`section[entity-type='${clicker.entity}'] [data-type="rps"]`) 
+    if(rpsEl) {
+      rpsEl.innerHTML = clicker.rps.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    }
+
   });
   const currency = getCurrency();
   const buyModuleBtns = document.querySelectorAll('.module-container button') 
