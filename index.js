@@ -1,5 +1,6 @@
 // #region constants
 const TICK = 42;
+const THEME_PREFIX = 'bao';
 const ENTITY_TYPES = {
   wrap: 'wrap',
   steam: 'steam',
@@ -10,15 +11,17 @@ const WRAP_MODULES = {
     baseRps: 1,
     baseCost: 50,
     growth: 1.3,
-    parentEntity: 'wrap'
+    parentEntity: 'wrap',
+
   },
 };
 const STEAM_MODULES = {
-  steamBasket: {
+  'steam-basket': {
     baseRps: 0.2,
     baseCost: 10,
     growth: 1.1,
-    parentEntity: 'steam'
+    parentEntity: 'steam',
+
   },
 };
 const SELL_MODULES = {
@@ -26,7 +29,8 @@ const SELL_MODULES = {
     baseRps: 2,
     baseCost: 50,
     growth: 1.5,
-    parentEntity: 'sell'
+    parentEntity: 'sell',
+
   }
 }
 const MODULES_MAP = {
@@ -94,6 +98,9 @@ const buyModule = (e) => {
     // Update quantity
     const quantityEl = e.currentTarget.querySelector('var[data-type="quantity"]')
     quantityEl.innerHTML = clicker.modules[moduleEntity]
+    // draw
+    const figure = document.querySelector(`article[class='${THEME_PREFIX}-${moduleEntity}'] figure`)
+    figure.append(document.createElement('picture'));
   }
 }
 
@@ -156,15 +163,21 @@ const initialize = () => {
     const costEl = document.querySelector(`button[entity-type="${moduleEntity}"] var[data-type="cost"]`);
     costEl.innerHTML = getModuleCost(moduleEntity).toLocaleString();
     // Update quantity
+    const quantity = gameState.clickers.find(clicker => clicker.entity === MODULES_MAP[moduleEntity].parentEntity).modules[moduleEntity] || 0
     const quantityEl = document.querySelector(`button[entity-type="${moduleEntity}"] var[data-type="quantity"]`);
-    quantityEl.innerHTML = gameState.clickers.find(clicker => clicker.entity === MODULES_MAP[moduleEntity].parentEntity).modules[moduleEntity] ?? ''
+    quantityEl.innerHTML = quantity || '';
+    // Render module pictures
+    const figure = document.querySelector(`article[class='${THEME_PREFIX}-${moduleEntity}'] figure`)
+    for(let i = 0; i < quantity; i++) {
+      figure.append(document.createElement('picture'));
+    }
   })
 }
 
 const startGameLoop = () => {
-  initialize()
   gameLoop();
   setTimeout(startGameLoop, TICK);
 };
 
+initialize()
 startGameLoop();

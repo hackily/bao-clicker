@@ -109,8 +109,11 @@
   button.bao-wrap {
     background: var(--bao-standalone);
   }
-  button.bao-wrap:active {
+  button.bao-wrap:hover {
     background: var(--bao-standalone-faces);
+  }
+  button.bao-wrap:active {
+    transform: scale(1.1);
   }
   button.bao-steam {
     background: var(--bao-steamer-empty);
@@ -121,16 +124,18 @@
     background-size: contain;
   }
   button.bao-steam:active {
-    background: var(--bao-steamer-closed);
-    background-size: contain;
+    transform: scale(1.1);
   }
   button.bao-sell {
     background: var(--bao-steamer-closed);
     background-size: contain;
   }
-  button.bao-sell:active {
+  button.bao-sell:hover {
     background: var(--bao-steamer-half-open);
     background-size: contain;
+  }
+  button.bao-sell:active {
+    transform: scale(1.1);
   }
   .create-product {
     display: flex;
@@ -172,6 +177,10 @@
     background: var(--bao-icon);
     background-size: contain;
     margin-right: 4px;
+  }
+  .module-container figure {
+    display: flex;
+    flex-direction: row;
   }
   .module-container figure picture {
     height: 5em;
