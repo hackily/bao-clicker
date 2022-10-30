@@ -54,6 +54,7 @@ const gameState = {
       rps: 0,
       click: 1,
       warnings: {
+        default: "Click to wrap bao",
         outOfResource: ""
       },
       modules: {
@@ -66,6 +67,7 @@ const gameState = {
       rps: 0,
       click: 1,
       warnings: {
+        default: "Click to steam bao",
         outOfResource: "Wrap more bao"
       },
       modules: {
@@ -78,6 +80,7 @@ const gameState = {
       rps: 0,
       click: 1,
       warnings: {
+        default: "Click to sell bao",
         outOfResource: "Steam more bao"
       },
       modules: {
@@ -153,15 +156,15 @@ const gameLoop = () => {
       prevClicker.value -= created;
       const clickerEl = document.querySelector(`button[entity-type="${clicker.entity}"]`)
       const warningEl = document.querySelector(`section[entity-type="${clicker.entity}"] aside`);
-      if(Math.round(prevClicker.value) === 0) {
+      if(!Math.round(prevClicker.value)) {
         clickerEl.disabled = true;
         if(warningEl.innerHTML !== clicker.warnings.outOfResource) {
           warningEl.innerHTML = clicker.warnings.outOfResource;
         }
       } else {
         clickerEl.disabled = false;
-        if(warningEl.innerHTML !== '') {
-          warningEl.innerHTML = '';
+        if(warningEl.innerHTML !== clicker.warnings.default) {
+          warningEl.innerHTML = clicker.warnings.default;
         }
       }
     }

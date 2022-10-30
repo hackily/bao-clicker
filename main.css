@@ -57,6 +57,8 @@
     --bao-typography-heading-large: 700 32px /40px sans-serif;
     --bao-typography-label-medium: 500 16px /20px sans-serif;
     --bao-typography-heading-xsmall: 700 20px /28px sans-serif;
+    --bao-typography-heading-medium: 700 28px /36px sans-serif;
+
     --bao-icon: url("./static/bao-icon.svg");
     --bao-rolling-pin: url("./static/rolling-pin.svg") no-repeat bottom;
     --bao-cart: url("./static/bao-cart.svg") no-repeat bottom;
@@ -83,6 +85,10 @@
 }
 
 @layer components {
+  h2 {
+    font: var(--bao-typography-heading-medium);
+    text-align:center;
+  }
   .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
