@@ -50,6 +50,10 @@
   body {
     --bao-typography-heading-large: 700 32px /40px sans-serif;
   }
+  .icon {
+    height: 1em;
+    width: 1em;
+  }
 }
 
 @layer components {
@@ -77,6 +81,15 @@
     align-items: start;
     margin-right: 24px;
   }
+  .module-container button section div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .module-container button img {
+    margin-right: 2px;
+  }
+  
   button .end-enhancer {
     font: var(--bao-typography-heading-large);
     line-height: inherit;
