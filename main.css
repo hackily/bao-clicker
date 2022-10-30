@@ -45,6 +45,11 @@
   #__next {
     isolation: isolate;
   }
+  .overflow-container {
+    display: flex;
+    overflow: auto;
+    flex: 1;
+  }
 }
 
 @layer theme {
@@ -53,6 +58,11 @@
     --bao-typography-label-medium: 500 16px /20px sans-serif;
     --bao-typography-heading-xsmall: 700 20px /28px sans-serif;
     --bao-icon: url("./static/bao-icon.svg");
+    --bao-rolling-pin: url("./static/rolling-pin.svg") no-repeat bottom;
+    --bao-cart: url("./static/bao-cart.svg") no-repeat bottom;
+    --bao-dough: url("./static/bao-dough.svg") no-repeat bottom;
+    --bao-dough-pin: url("./static/bao-dough-pin.svg") no-repeat bottom;
+    --bao-dough-whack: url("./static/bao-dough-whack.svg") no-repeat bottom;
     --bao-steamer: url("./static/steamer.svg") no-repeat bottom;
     --bao-steamer-open: url("./static/steamer-open.svg") no-repeat bottom;
     --bao-steamer-half-open: url("./static/steamer-half-open.svg") no-repeat
@@ -76,21 +86,27 @@
   .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 100%;
+    width: 100vw;
     height: 100%;
+  }
+  .clicker-container {
+    min-width: 0;
   }
   .container > section:not(:last-child) {
     border-right: 2px solid black;
+  }
+  .bao-rolling-pin picture {
+    background: var(--bao-rolling-pin);
+    background-size: contain;
   }
   .bao-auntie picture {
     background: var(--bao-auntie);
     background-size: contain;
   }
   .bao-cart picture {
-    background: var(--bao-steamer-half-open);
+    background: var(--bao-cart);
     background-size: contain;
   }
-
   .bao-steam-basket picture {
     background: var(--bao-steamer-closed);
     background-size: contain;
@@ -126,10 +142,10 @@
     margin-bottom: 8px;
   }
   button.bao-wrap {
-    background: var(--bao-standalone);
+    background: var(--bao-dough);
   }
   button.bao-wrap:hover {
-    background: var(--bao-standalone-faces);
+    background: var(--bao-dough-pin);
   }
   button.bao-wrap:active:not(:disabled) {
     transform: scale(1.1);
@@ -190,10 +206,12 @@
   .module-container article {
     display: flex;
     gap: 24px;
+    min-width: 0;
   }
   .module-container button {
     display: flex;
     align-items: center;
+    gap: 24px;
   }
   .module-container button:disabled {
     filter: opacity(60%);
@@ -202,7 +220,6 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-right: 24px;
   }
   .module-container button section div {
     display: flex;

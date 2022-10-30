@@ -7,12 +7,17 @@ const ENTITY_TYPES = {
   sell: 'sell',
 }
 const WRAP_MODULES = {
-  auntie: {
+  'rolling-pin': {
     baseRps: 1,
-    baseCost: 50,
+    baseCost: 10,
     growth: 1.1,
     parentEntity: 'wrap',
-
+  },
+  auntie: {
+    baseRps: 3,
+    baseCost: 50,
+    growth: 1.12,
+    parentEntity: 'wrap',
   },
 };
 const STEAM_MODULES = {
@@ -52,7 +57,7 @@ const gameState = {
         outOfResource: ""
       },
       modules: {
-        auntie: 1
+        'rolling-pin': 25
       },
     },
     {

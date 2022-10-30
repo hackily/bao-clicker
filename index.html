@@ -7,9 +7,9 @@
       name="keywords"
       content="idle clicker game xiaolongbao bao steamed buns xlb"
     />
-    <link rel="icon" type="image/svg+xml" href="static/bao-icon.svg">
-    <link rel="icon" type="image/png" href="static/favicon.png">
-    <link rel="stylesheet" type="text/css" href="main.css" >
+    <link rel="icon" type="image/svg+xml" href="static/bao-icon.svg" />
+    <link rel="icon" type="image/png" href="static/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
   <body>
     <div class="container">
@@ -17,9 +17,7 @@
         <section class="create-product" entity-type="wrap">
           <var class="bao-quantity" data-type="value"></var>
           <label>wrapped bao</label>
-          <div>
-            <label>per second: </label><var data-type="rps"></var>
-          </div>
+          <div><label>per second: </label><var data-type="rps"></var></div>
           <button
             class="clicker bao-wrap"
             type="button"
@@ -29,6 +27,22 @@
           <aside></aside>
         </section>
         <section class="module-container">
+          <article class="bao-rolling-pin">
+            <button entity-type="rolling-pin" onclick="buyModule(event)">
+              <picture></picture>
+              <section>
+                <span>Rolling pin</span>
+                <div class="cost">
+                  <picture></picture>
+                  <var data-type="cost">10</var>
+                </div>
+              </section>
+              <var class="end-enhancer" data-type="quantity">1</var>
+            </button>
+            <div class="overflow-container">
+              <figure></figure>
+            </div>
+          </article>
           <article class="bao-auntie">
             <button entity-type="auntie" onclick="buyModule(event)">
               <picture></picture>
@@ -41,7 +55,9 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure></figure>
+            <div class="overflow-container">
+              <figure></figure>
+            </div>
           </article>
         </section>
       </section>
@@ -49,9 +65,7 @@
         <section class="create-product" entity-type="steam">
           <var class="bao-quantity" data-type="value"></var>
           <label>steamed bao</label>
-          <div>
-            <label>per second: </label><var data-type="rps"></var>
-          </div>
+          <div><label>per second: </label><var data-type="rps"></var></div>
           <button
             class="clicker bao-steam"
             type="button"
@@ -73,7 +87,9 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure></figure>
+            <div class="overflow-container">
+              <figure></figure>
+            </div>
           </article>
         </section>
       </section>
@@ -81,9 +97,7 @@
         <section class="create-product" entity-type="sell">
           <var class="bao-quantity" data-type="value"></var>
           <label>sold bao</label>
-          <div>
-            <label>per second: </label><var data-type="rps"></var>
-          </div>
+          <div><label>per second: </label><var data-type="rps"></var></div>
           <button
             class="clicker bao-sell"
             type="button"
@@ -105,7 +119,9 @@
               </section>
               <var class="end-enhancer" data-type="quantity">1</var>
             </button>
-            <figure></figure>
+            <div class="overflow-container">
+              <figure></figure>
+            </div>
           </article>
         </section>
       </section>
